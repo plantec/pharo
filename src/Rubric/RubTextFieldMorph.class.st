@@ -248,10 +248,8 @@ RubTextFieldMorph >> whenKeystrokeInTextArea: anAnnouncement [
 
 { #category : #'event handling' }
 RubTextFieldMorph >> whenReturnEntered: anAnnouncement [
-	self acceptOnCR
-		ifTrue: [
-			anAnnouncement accepted: true ].
 	self changed
+
 ]
 
 { #category : #initialization }

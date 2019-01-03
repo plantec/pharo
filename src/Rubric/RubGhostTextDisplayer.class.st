@@ -155,6 +155,6 @@ RubGhostTextDisplayer >> updateMarginsWith: aMargin [
 RubGhostTextDisplayer >> updateTextWith: aText [
 	self
 		handleTextChangeWhile: [ 
-			ghostText updateTextWith: aText asText.
+			ghostText updateTextWith: aText.
 			ghostText textColor: self textColor ]
 ]

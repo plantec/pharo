@@ -1,10 +1,7 @@
 "
 This class was introduced to ease the migration to Rubric.
-Thus, I''am a replacement for compatibility with old PluggableTextMorph.
-It is still partly based on change/update.
-Do not use this class for new developments since it will be deprecated asap.
-Use RubScrolledTextMorph instead
-
+It is still based on change/update.
+Try to not use it 
 "
 Class {
 	#name : #RubPluggableTextMorph,
@@ -12,7 +9,7 @@ Class {
 	#instVars : [
 		'getEnabledSelector'
 	],
-	#category : #'Rubric-Compatibility-toBeDeprecated'
+	#category : #'Rubric-Editing-Widgets'
 }
 
 { #category : #'instance creation' }
@@ -42,27 +39,6 @@ RubPluggableTextMorph >> clearUndoManager [
 	self textArea editingState clearUndoManager: nil
 ]
 
-{ #category : #scrolling }
-RubPluggableTextMorph >> disable [
-	self beReadOnly 
-]
-
-{ #category : #scrolling }
-RubPluggableTextMorph >> enable [
-	self beEditable 
-]
-
-{ #category : #accessing }
-RubPluggableTextMorph >> getColorSelector [
-	^ self getBackgroundColorSelector 
-]
-
-{ #category : #accessing }
-RubPluggableTextMorph >> getColorSelector: aSymbol [
-	self getBackgroundColorSelector: aSymbol.
-	self update: self getColorSelector.
-]
-
 { #category : #accessing }
 RubPluggableTextMorph >> getEnabledSelector [
 	"Answer the value of getEnabledSelector"
@@ -75,14 +51,6 @@ RubPluggableTextMorph >> getEnabledSelector: aSymbol [
 	"Answer the value of getEnabledSelector"
 
 	getEnabledSelector := aSymbol
-]
-
-{ #category : #accessing }
-RubPluggableTextMorph >> getMenuSelector: aGetMenuSelector [
-	aGetMenuSelector
-		ifNil: [ self textArea forbidMenu ]
-		ifNotNil: [ self textArea allowMenu.
-			self menuProvider: self model selector: aGetMenuSelector ]
 ]
 
 { #category : #accessing }
@@ -180,19 +148,11 @@ RubPluggableTextMorph >> scrollerOffsetChanged [
 				yourself)
 ]
 
-{ #category : #scrolling }
-RubPluggableTextMorph >> styled: aBoolean [
-	aBoolean ifTrue: [ ^ self beForSmalltalkCode  ].
-	self beForPlainText
-]
-
 { #category : #updating }
 RubPluggableTextMorph >> update: aSymbol [
 	aSymbol ifNil: [ ^ self ].
 	aSymbol == #flash
 		ifTrue: [ ^ self flash ].
-	(aSymbol == self getColorSelector)
-		ifTrue: [^ self backgroundColor: self getBackgroundColorFromModel ].
 	aSymbol == self getTextSelector
 		ifTrue: [ self updateTextWith: self getTextFromModel.
 			^ self setSelection: self getSelectionFromModel ].
